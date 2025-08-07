@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Breakfast Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="menu">
+  <h2>🍳 Breakfast Menu</h2>
+  <form id="orderForm">
+    <div class="item"><input type="checkbox" value="10" data-name="Idly"> Idly - ₹10 <select disabled><option>Qty</option></select></div>
+    <div class="item"><input type="checkbox" value="15" data-name="Dosa"> Dosa - ₹15 <select disabled><option>Qty</option></select></div>
+    <div class="item"><input type="checkbox" value="30" data-name="Pongal"> Pongal - ₹30 <select disabled><option>Qty</option></select></div>
+    <div class="item"><input type="checkbox" value="10" data-name="Vada"> Vada - ₹10 <select disabled><option>Qty</option></select></div>
+    <div class="item"><input type="checkbox" value="50" data-name="Mini Tiffin"> Mini Tiffin - ₹50 <select disabled><option>Qty</option></select></div>
+    <div class="item"><input type="checkbox" value="15" data-name="Coffee"> Coffee - ₹15 <select disabled><option>Qty</option></select></div>
+    <div class="item"><input type="checkbox" value="10" data-name="Tea"> Tea - ₹10 <select disabled><option>Qty</option></select></div>
+
+    <h3>Total: ₹<span id="total">0</span></h3>
+    <button type="button" onclick="showPaymentOptions()">Pay Now</button>
+  </form>
+
+  <div id="paymentSection" class="hidden">
+    <h3>Select Payment Mode</h3>
+    <button onclick="placeOrder('cash')">Cash</button>
+    <button onclick="placeOrder('gpay')">GPay</button>
+    <div id="qrCode" class="hidden"><img src="qr.jpg" alt="GPay QR Code" width="200"></div>
+    <div id="orderSuccess" class="hidden">
+      <p>✅ Order Placed</p>
+      <p>Thanks for placing order</p>
+    </div>
+  </div>
+
+  <script>
+    const selects = document.querySelectorAll("select");
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    checkboxes.forEach((checkbox, i) => {
+      const select = checkbox.nextElementSibling;
+      for (let q = 1; q <= 10; q++) {
+        const opt = document.createElement("option");
+        opt.value = q;
+        opt.text = q;
+        select.appendChild(opt);
+      }
+      checkbox.addEventListener("change", () => {
+        select.disabled = !checkbox.checked;
+        if (!checkbox.checked) select.value = 0;
+        updateTotal();
+      });
+      select.addEventListener("change", updateTotal);
+    });
+
+    function updateTotal() {
+      let total = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          const qty = parseInt(cb.nextElementSibling.value);
+          const price = parseInt(cb.value);
+          total += qty * price;
+        }
+      });
+      document.getElementById("total").textContent = total;
+    }
+
+    function showPaymentOptions() {
+      if (parseInt(document.getElementById("total").textContent) === 0) {
+        alert("Please select at least one item.");
+        return;
+      }
+      document.getElementById("paymentSection").classList.remove("hidden");
+    }
+
+    function placeOrder(method) {
+      if (method === 'gpay') {
+        document.getElementById("qrCode").classList.remove("hidden");
+        setTimeout(() => {
+          document.getElementById("orderSuccess").classList.remove("hidden");
+        }, 2000);
+      } else {
+        document.getElementById("orderSuccess").classList.remove("hidden");
+      }
+    }
+  </script>
+</body>
+</html>
