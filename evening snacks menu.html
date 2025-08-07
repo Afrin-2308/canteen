@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evening Snacks Menu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff7e6;
+      padding: 20px;
+      text-align: center;
+    }
+    h2 {
+      color: #d2691e;
+    }
+    .menu-item {
+      margin: 15px 0;
+    }
+    .menu-item input[type="checkbox"] {
+      transform: scale(1.5);
+      margin-right: 10px;
+    }
+    select {
+      padding: 5px;
+      margin-left: 10px;
+    }
+    #total {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+    .pay-options {
+      margin-top: 30px;
+    }
+    .hidden {
+      display: none;
+    }
+    .qr {
+      margin-top: 20px;
+    }
+    .tick {
+      font-size: 50px;
+      color: green;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Evening Snacks Menu</h2>
+
+  <div class="menu-item">
+    <input type="checkbox" id="tea" value="10" onchange="toggleQuantity('tea')" /> Tea - ₹10
+    <select id="qty-tea" class="hidden" onchange="calculateTotal()">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </div>
+
+  <div class="menu-item">
+    <input type="checkbox" id="coffee" value="15" onchange="toggleQuantity('coffee')" /> Coffee - ₹15
+    <select id="qty-coffee" class="hidden" onchange="calculateTotal()">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </div>
+
+  <div class="menu-item">
+    <input type="checkbox" id="juice" value="20" onchange="toggleQuantity('juice')" /> Juice - ₹20
+    <select id="qty-juice" class="hidden" onchange="calculateTotal()">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </div>
+
+  <div class="menu-item">
+    <input type="checkbox" id="samosa" value="15" onchange="toggleQuantity('samosa')" /> Samosa - ₹15
+    <select id="qty-samosa" class="hidden" onchange="calculateTotal()">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </div>
+
+  <div id="total">Total: ₹0</div>
+  <div class="pay-options">
+    <button onclick="showPaymentOptions()">Pay Now</button>
+  </div>
+  <div id="payment-methods" class="hidden">
+    <h3>Select Payment Mode:</h3>
+    <button onclick="pay('gpay')">GPay</button>
+    <button onclick="pay('cash')">Cash</button>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    function toggleQuantity(id) {
+      const checkbox = document.getElementById(id);
+      const qty = document.getElementById('qty-' + id);
+      qty.classList.toggle('hidden', !checkbox.checked);
+      calculateTotal();
+    }
+
+    function calculateTotal() {
+      let total = 0;
+      ['tea', 'coffee', 'juice', 'samosa'].forEach(id => {
+        const checkbox = document.getElementById(id);
+        if (checkbox.checked) {
+          const qty = document.getElementById('qty-' + id);
+          total += parseInt(checkbox.value) * parseInt(qty.value);
+        }
+      });
+      document.getElementById('total').innerText = 'Total: ₹' + total;
+    }
+
+    function showPaymentOptions() {
+      document.getElementById('payment-methods').classList.remove('hidden');
+    }
+
+    function pay(method) {
+      const result = document.getElementById('result');
+      if (method === 'gpay') {
+        result.innerHTML = '<div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay" alt="QR Code" /></div>';
+      } else {
+        result.innerHTML = '<h3>Order Placed</h3><p>Thanks for placing order</p><div class="tick">✔️</div>';
+      }
+    }
+  </script>
+</body>
+</html>
