@@ -19,13 +19,14 @@
       min-height: 100vh;
     }
 
-    /* 🔷 Top header with logo and name */
+    /* 🔷 Top header with logo and name - transparent background */
     .logo-box {
-      background-color: rgba(255, 255, 255, 0.95);
       width: 100%;
       text-align: center;
       padding: 20px 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      /* Removed background and box-shadow to make it transparent */
+      background: transparent;
+      box-shadow: none;
     }
 
     .logo-box img {
@@ -34,9 +35,11 @@
 
     .college-name {
       margin-top: 10px;
-      color: black;
+      color: white; /* White text for contrast */
       font-size: 22px;
       font-weight: bold;
+      /* subtle shadow for better readability */
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
     }
 
     /* 🔷 Login box */
