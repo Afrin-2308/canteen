@@ -80,6 +80,8 @@
   <button onclick="placeOrder('gpay')">GPay</button>
   <div id="qrCode" class="hidden" style="cursor: pointer; margin-top: 10px;">
   </div>
+  <p style="color: #555; font-style: italic;">Click here to view QR Code</p>
+     <img src="C:\Users\HP\Downloads\qr.jpg">
   <div id="orderSuccess" class="hidden">
     <p>✅ Order Placed</p>
     <p>Thanks for placing order</p>
@@ -131,8 +133,6 @@
       if (method === 'gpay') {
         document.getElementById("qrCode").classList.remove("hidden");
         setTimeout(() => {
-          <p style="color: #555; font-style: italic;">Click here to view QR Code</p>
-     <img src="C:\Users\HP\Downloads\qr.jpg">
           document.getElementById("orderSuccess").classList.remove("hidden");
         }, 2000);
       } else {
