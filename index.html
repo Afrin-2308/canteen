@@ -19,13 +19,15 @@
       min-height: 100vh;
     }
 
-    /* 🔷 Top header with logo and name */
+    /* 🔷 Header with logos on each end and name in center */
     .logo-box {
       background-color: rgba(255, 255, 255, 0.95);
       width: 100%;
-      text-align: center;
       padding: 20px 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .logo-box img {
@@ -33,13 +35,14 @@
     }
 
     .college-name {
-      margin-top: 10px;
+      flex: 1;
+      text-align: center;
       color: black;
       font-size: 22px;
       font-weight: bold;
     }
 
-    /* 🔷 Login box */
+    /* 🔷 Login Container */
     .container {
       background: rgba(255, 255, 255, 0.9);
       padding: 30px;
@@ -85,13 +88,14 @@
 </head>
 <body class="index">
 
-  <!-- 🔷 Logo + College Name -->
+  <!-- 🔷 Header with two logos -->
   <div class="logo-box">
-    <img src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo">
+    <img src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo Left">
     <div class="college-name">Prince Shri Venkateshwara Arts and Science College</div>
+    <img src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo Right">
   </div>
 
-  <!-- 🔷 Canteen Login Form -->
+  <!-- 🔷 Login Form -->
   <div class="container">
     <h2 class="canteen-title">Canteen Damaka</h2>
     <div class="login-box">
