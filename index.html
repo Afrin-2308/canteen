@@ -19,21 +19,27 @@
       min-height: 100vh;
     }
 
-    /* 🔷 Top logo-only box without rounded corners */
-    .logo-only-box {
+    /* 🔷 Top header with logo and name */
+    .logo-box {
+      background-color: rgba(255, 255, 255, 0.95);
       width: 100%;
-      background-color: white;
-      padding: 15px 0;
       text-align: center;
-      border-radius: 0; /* No rounding */
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .logo-only-box img {
+    .logo-box img {
       max-height: 90px;
     }
 
-    /* 🔷 Login Box */
+    .college-name {
+      margin-top: 10px;
+      color: black;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    /* 🔷 Login box */
     .container {
       background: rgba(255, 255, 255, 0.9);
       padding: 30px;
@@ -79,12 +85,13 @@
 </head>
 <body class="index">
 
-  <!-- 🔷 Top logo-only box -->
-  <div class="logo-only-box">
+  <!-- 🔷 Logo + College Name -->
+  <div class="logo-box">
     <img src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo">
+    <div class="college-name">Prince Shri Venkateshwara Arts and Science College</div>
   </div>
 
-  <!-- 🔷 Login Form Box -->
+  <!-- 🔷 Canteen Login Form -->
   <div class="container">
     <h2 class="canteen-title">Canteen Damaka</h2>
     <div class="login-box">
