@@ -8,7 +8,7 @@ function placeOrder(method) {
 
     // Add click listener to qrDiv to show image
     qrDiv.onclick = () => {
-      qrDiv.innerHTML = `<img src="C:\\Users\\Admin\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE\\OPDA4RGH\\IMG-20250810-WA0048[1].jpg" alt="GPay QR Code" width="200">`;
+      qrDiv.innerHTML = `<img src="C:\Users\HP\Downloads\qr.jpg" alt="GPay QR Code" width="200">`;
       // Show order success message after showing image, after 2 seconds
       setTimeout(() => {
         document.getElementById("orderSuccess").classList.remove("hidden");
