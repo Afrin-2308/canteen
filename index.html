@@ -97,4 +97,23 @@
     <div class="login-box">
       <input type="text" id="name" placeholder="Enter your name" />
       <input type="text" id="class" placeholder="Enter your class" />
-      <button onclic
+      <button onclick="goToMenu()">Order Now</button>
+    </div>
+  </div>
+
+  <script>
+    function goToMenu() {
+      const name = document.getElementById('name').value;
+      const cls = document.getElementById('class').value;
+      if (name && cls) {
+        localStorage.setItem('studentName', name);
+        localStorage.setItem('studentClass', cls);
+        window.location.href = 'menu.html';
+      } else {
+        alert('Please enter your name and class.');
+      }
+    }
+  </script>
+
+</body>
+</html>
