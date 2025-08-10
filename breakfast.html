@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Breakfast Menu</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     body.menu {
       margin: 0;
@@ -42,6 +42,7 @@
       background-color: #27ae60;
       color: white;
       border-radius: 6px;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
@@ -53,6 +54,11 @@
       margin-top: 15px;
     }
 
+    #qrCode img {
+      width: 200px;
+      height: 200px;
+    }
+
     .hidden {
       display: none;
     }
@@ -61,58 +67,108 @@
 <body class="menu">
   <h2>🍳 Breakfast Menu</h2>
   <form id="orderForm">
-    <div class="item"><input type="checkbox" value="10" data-name="Idly"> Idly - ₹10 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="15" data-name="Dosa"> Dosa - ₹15 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="30" data-name="Pongal"> Pongal - ₹30 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="10" data-name="Vada"> Vada - ₹10 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="50" data-name="Mini Tiffin"> Mini Tiffin - ₹50 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="15" data-name="Coffee"> Coffee - ₹15 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="10" data-name="Tea"> Tea - ₹10 <select disabled><option>Qty</option></select></div>
+    <div class="item">
+      <input type="checkbox" value="10" data-name="Idly" id="idly">
+      <label for="idly">Idly - ₹10</label>
+      <select disabled>
+        <option>Qty</option>
+      </select>
+    </div>
+    <div class="item">
+      <input type="checkbox" value="15" data-name="Dosa" id="dosa">
+      <label for="dosa">Dosa - ₹15</label>
+      <select disabled>
+        <option>Qty</option>
+      </select>
+    </div>
+    <div class="item">
+      <input type="checkbox" value="30" data-name="Pongal" id="pongal">
+      <label for="pongal">Pongal - ₹30</label>
+      <select disabled>
+        <option>Qty</option>
+      </select>
+    </div>
+    <div class="item">
+      <input type="checkbox" value="10" data-name="Vada" id="vada">
+      <label for="vada">Vada - ₹10</label>
+      <select disabled>
+        <option>Qty</option>
+      </select>
+    </div>
+    <div class="item">
+      <input type="checkbox" value="50" data-name="Mini Tiffin" id="miniTiffin">
+      <label for="miniTiffin">Mini Tiffin - ₹50</label>
+      <select disabled>
+        <option>Qty</option>
+      </select>
+    </div>
+    <div class="item">
+      <input type="checkbox" value="15" data-name="Coffee" id="coffee">
+      <label for="coffee">Coffee - ₹15</label>
+      <select disabled>
+        <option>Qty</option>
+      </select>
+    </div>
+    <div class="item">
+      <input type="checkbox" value="10" data-name="Tea" id="tea">
+      <label for="tea">Tea - ₹10</label>
+      <select disabled>
+        <option>Qty</option>
+      </select>
+    </div>
 
     <h3>Total: ₹<span id="total">0</span></h3>
     <button type="button" onclick="showPaymentOptions()">Pay Now</button>
   </form>
 
   <div id="paymentSection" class="hidden">
-  <h3>Select Payment Mode</h3>
-  <button onclick="placeOrder('cash')">Cash</button>
-  <button onclick="placeOrder('gpay')">GPay</button>
-  <div id="qrCode" class="hidden">
-    <img src="C:\Users\Admin\Downloads\qr code.jpg" alt="GPay QR Code" width="200" />
+    <h3>Select Payment Mode</h3>
+    <button onclick="placeOrder('cash')">Cash</button>
+    <button onclick="placeOrder('gpay')">GPay</button>
+
+    <div id="qrCode" class="hidden">
+      <p>Scan to pay via GPay</p>
+      <img src="C:\Users\Admin\Downloads\qr code.jpg" alt="GPay QR Code" />
+    </div>
+
+    <div id="orderSuccess" class="hidden">
+      <p>✅ Order Placed</p>
+      <p>Thanks for placing order</p>
+    </div>
   </div>
-  <div id="orderSuccess" class="hidden">
-    <p>✅ Order Placed</p>
-    <p>Thanks for placing order</p>
-  </div>
-</div>
 
   <script>
     const selects = document.querySelectorAll("select");
     const checkboxes = document.querySelectorAll("input[type='checkbox']");
 
-    checkboxes.forEach((checkbox, i) => {
-      const select = checkbox.nextElementSibling;
-      for (let q = 1; q <= 10; q++) {
-        const opt = document.createElement("option");
-        opt.value = q;
-        opt.text = q;
-        select.appendChild(opt);
+    // Populate quantity dropdowns from 1 to 10
+    selects.forEach(select => {
+      for (let i = 1; i <= 10; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.text = i;
+        select.appendChild(option);
       }
+    });
+
+    // Enable/disable quantity dropdown on checkbox change & update total
+    checkboxes.forEach((checkbox, i) => {
       checkbox.addEventListener("change", () => {
-        select.disabled = !checkbox.checked;
-        if (!checkbox.checked) select.value = 0;
+        selects[i].disabled = !checkbox.checked;
+        if (!checkbox.checked) selects[i].value = "Qty";
         updateTotal();
       });
-      select.addEventListener("change", updateTotal);
+
+      selects[i].addEventListener("change", updateTotal);
     });
 
     function updateTotal() {
       let total = 0;
-      checkboxes.forEach(cb => {
+      checkboxes.forEach((cb, i) => {
         if (cb.checked) {
-          const qty = parseInt(cb.nextElementSibling.value);
+          const qty = parseInt(selects[i].value);
           const price = parseInt(cb.value);
-          total += qty * price;
+          if (!isNaN(qty)) total += qty * price;
         }
       });
       document.getElementById("total").textContent = total;
@@ -124,16 +180,17 @@
         return;
       }
       document.getElementById("paymentSection").classList.remove("hidden");
+      document.getElementById("qrCode").classList.add("hidden");
+      document.getElementById("orderSuccess").classList.add("hidden");
     }
 
     function placeOrder(method) {
-      if (method === 'gpay') {
+      if (method === "gpay") {
         document.getElementById("qrCode").classList.remove("hidden");
-        setTimeout(() => {
-          document.getElementById("orderSuccess").classList.remove("hidden");
-        }, 2000);
+        document.getElementById("orderSuccess").classList.add("hidden");
       } else {
         document.getElementById("orderSuccess").classList.remove("hidden");
+        document.getElementById("qrCode").classList.add("hidden");
       }
     }
   </script>
