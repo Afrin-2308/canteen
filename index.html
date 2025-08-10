@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,49 +7,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Ravie&display=swap" rel="stylesheet" />
   <style>
     body.index {
-      background-image: url('https://media.istockphoto.com/id/545679848/photo/frame-from-different-burgers-with-grilled-vegetables.jpg?s=612x612&w=0&k=20&c=wv_6gXbqdePWk6QoQniP72JnqiHeEdxBH2HZ7SdnqCU=');
+      background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Ftake-away-food-on-table%3Fpage%3D2&psig=AOvVaw0YEb2coKWSHXby22UsLoJc&ust=1754891261971000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNC1osXF_44DFQAAAAAdAAAAABAL');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
       display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
+      font-family: Arial, sans-serif;
     }
 
-    /* 🔷 Header Logo + Name Box */
-    .logo-box {
-      background-color: rgba(255, 255, 255, 0.95);
-      width: 100%;
-      text-align: center;
-      padding: 20px 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .logo-box img {
-      max-height: 90px;
-    }
-
-    .college-name {
-      color: black;
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    /* 🔷 Login Container */
     .container {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.85);
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
       text-align: center;
       width: 90%;
       max-width: 400px;
-      margin-top: 30px;
+    }
+
+    .college-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
     .canteen-title {
@@ -84,15 +69,8 @@
   </style>
 </head>
 <body class="index">
-
-  <!-- ✅ TOP LOGO + NAME BOX -->
-  <div class="logo-box">
-    <img src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo">
-    <div class="college-name">Prince Shri Venkateshwara Arts and Science College</div>
-  </div>
-
-  <!-- ✅ LOGIN BOX -->
   <div class="container">
+    <h1 class="college-title">Prince Shri Venkateshwara Arts and Science College</h1>
     <h2 class="canteen-title">Canteen Damaka</h2>
     <div class="login-box">
       <input type="text" id="name" placeholder="Enter your name" />
@@ -114,6 +92,5 @@
       }
     }
   </script>
-
 </body>
 </html>
