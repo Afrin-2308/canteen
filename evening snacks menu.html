@@ -3,15 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Evening snacks menu</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Evening Snacks Menu</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
     .menu-section {
       max-width: 600px;
       margin: auto;
       background: #fff;
       padding: 20px;
       border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
     }
     .menu-item {
       display: flex;
@@ -45,10 +54,10 @@
 </head>
 <body>
   <div class="menu-section">
-    <h2>Evening snacks menu</h2>
-    <form id="Evening snacks">
+    <h2>Evening Snacks Menu</h2>
+    <form id="snacksForm">
       <div class="menu-item">
-        <label><input type="checkbox" name="item" value="15" data-name="Samosa"> Samosa - ₹15</label>
+        <label><input type="checkbox" value="15" data-name="Samosa"> Samosa - ₹15</label>
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
@@ -58,7 +67,7 @@
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" name="item" value="20" data-name="puff"> puff - ₹20</label>
+        <label><input type="checkbox" value="25" data-name="Veg Roll"> Veg Roll - ₹25</label>
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
@@ -68,7 +77,7 @@
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" name="item" value="30" data-name="donuts"> donuts - ₹30</label>
+        <label><input type="checkbox" value="30" data-name="Chicken Roll"> Chicken Roll - ₹30</label>
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
@@ -78,7 +87,7 @@
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" name="item" value="10" data-name="tea"> tea - ₹10</label>
+        <label><input type="checkbox" value="20" data-name="Puff"> Puff - ₹20</label>
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
@@ -88,7 +97,7 @@
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" name="item" value="15" data-name="Coffee"> coffee - ₹15</label>
+        <label><input type="checkbox" value="30" data-name="Ice Cream"> Ice Cream - ₹30</label>
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
@@ -98,7 +107,7 @@
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" name="item" value="30" data-name="ice cream"> ice cream - ₹30</label>
+        <label><input type="checkbox" value="10" data-name="Tea"> Tea - ₹10</label>
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
@@ -108,7 +117,7 @@
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" name="item" value="25" data-name="veg roll"> veg roll - ₹25</label>
+        <label><input type="checkbox" value="15" data-name="Coffee"> Coffee - ₹15</label>
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
@@ -117,20 +126,24 @@
           <option value="10">10</option>
         </select>
       </div>
+
       <div id="total">Total: ₹0</div>
       <button type="button" onclick="showPayment()">Pay Now</button>
     </form>
+
     <div class="payment-section" id="paymentOptions" style="display:none">
       <button onclick="showQR()">GPay</button>
       <button onclick="placeOrder()">Cash</button>
     </div>
+
     <div class="qr" id="qrCode">
       <p>Scan to pay via GPay</p>
       <img src="https://via.placeholder.com/150" alt="QR Code">
     </div>
+
     <div class="placed" id="orderPlaced">
       <p><strong>Order Placed</strong></p>
-      <p>Thanks for placing order</p>
+      <p>Thanks for placing your order</p>
       <div class="tick">✔️</div>
     </div>
   </div>
