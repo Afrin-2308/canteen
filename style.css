@@ -1,4 +1,35 @@
 
+.item {
+  margin: 10px auto;
+  width: 300px;
+}
+
+.item select {
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+#paymentSection button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#qrCode img {
+  margin-top: 10px;
+}
+
+#orderSuccess {
+  margin-top: 20px;
+  font-size: 18px;
+  color: green;
+}
 body.menu {
   display: flex;
   flex-direction: column;
