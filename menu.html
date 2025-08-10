@@ -6,13 +6,21 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     body.menu {
-      text-align: center;          /* Center all text inside body */
+      text-align: center;
       display: flex;
       flex-direction: column;
-      justify-content: center;     /* Vertically center content */
-      align-items: center;         /* Horizontally center content */
-      height: 100vh;               /* Full viewport height */
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
+
+      /* Background image from Google */
+      background-image: url('https://t4.ftcdn.net/jpg/02/92/20/37/360_F_292203735_CSsyqyS6A4Z9Czd4Msf7qZEhoxjpzZl1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white; /* Text color for contrast */
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7); /* subtle shadow for readability */
     }
     .meal-options {
       margin-top: 20px;
@@ -24,12 +32,12 @@
       cursor: pointer;
       border-radius: 10px;
       border: none;
-      background: #4caf50;
+      background: rgba(76, 175, 80, 0.8); /* Slightly transparent green */
       color: white;
       transition: background-color 0.3s ease;
     }
     .meal-options button:hover {
-      background: #388e3c;
+      background: rgba(56, 142, 60, 0.9);
     }
   </style>
 </head>
@@ -41,4 +49,3 @@
   </div>
 </body>
 </html>
-
