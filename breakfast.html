@@ -1,143 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Breakfast Menu</title>
-  <link rel="stylesheet" href="style.css">
   <style>
-    body.menu {
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background-image: url('https://images5.alphacoders.com/129/1290195.jpg'); /* Breakfast image */
+    body {
+      background-image: url('https://img.freepik.com/free-photo/breakfast-background-with-copy-space_23-2148221744.jpg');
       background-size: cover;
-      background-repeat: no-repeat;
       background-position: center;
-      color: #000;
+      background-repeat: no-repeat;
+      margin: 0;
+      min-height: 100vh;
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      font-family: Arial, sans-serif;
     }
 
-    form {
-      background-color: rgba(255, 255, 255, 0.95);
+    .menu-section {
+      max-width: 600px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.9);
       padding: 20px;
-      border-radius: 12px;
-      max-width: 500px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      border-radius: 10px;
+      color: black;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
     }
-
-    h2, h3 {
-      text-align: center;
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px 0;
     }
-
-    .item {
-      margin-bottom: 10px;
+    select {
+      margin-left: 10px;
     }
-
-    button {
-      margin: 10px 5px;
-      padding: 10px 20px;
+    #total {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 20px;
+      text-align: right;
+    }
+    .payment-section button {
+      margin: 10px;
+      padding: 10px;
       font-size: 16px;
       cursor: pointer;
-      border: none;
-      background-color: #27ae60;
-      color: white;
       border-radius: 6px;
+      border: none;
+      background-color: #4caf50;
+      color: white;
+      transition: background-color 0.3s ease;
     }
-
-    button:hover {
-      background-color: #219150;
+    .payment-section button:hover {
+      background-color: #388e3c;
     }
-
-    #qrCode, #orderSuccess {
-      text-align: center;
-      margin-top: 15px;
-    }
-
-    .hidden {
+    .qr, .placed {
       display: none;
+      text-align: center;
+      margin-top: 20px;
+      color: black;
+    }
+    .tick {
+      font-size: 40px;
+      color: green;
+      margin-top: 10px;
     }
   </style>
 </head>
-<body class="menu">
-  <h2>🍳 Breakfast Menu</h2>
-  <form id="orderForm">
-    <div class="item"><input type="checkbox" value="10" data-name="Idly"> Idly - ₹10 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="15" data-name="Dosa"> Dosa - ₹15 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="30" data-name="Pongal"> Pongal - ₹30 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="10" data-name="Vada"> Vada - ₹10 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="50" data-name="Mini Tiffin"> Mini Tiffin - ₹50 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="15" data-name="Coffee"> Coffee - ₹15 <select disabled><option>Qty</option></select></div>
-    <div class="item"><input type="checkbox" value="10" data-name="Tea"> Tea - ₹10 <select disabled><option>Qty</option></select></div>
+<body>
+  <div class="menu-section">
+    <h2>Breakfast Menu</h2>
+    <form id="breakfastForm">
+      <div class="menu-item">
+        <label><input type="checkbox" name="item" value="30" data-name="Idli"> Idli (2 pcs) - ₹30</label>
+        <select disabled>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
+        </select>
+      </div>
+      <div class="menu-item">
+        <label><input type="checkbox" name="item" value="40" data-name="Dosa"> Dosa - ₹40</label>
+        <select disabled>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
+        </select>
+      </div>
+      <div class="menu-item">
+        <label><input type="checkbox" name="item" value="45" data-name="Poori"> Poori (2 pcs) - ₹45</label>
+        <select disabled>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
+        </select>
+      </div>
+      <div class="menu-item">
+        <label><input type="checkbox" name="item" value="35" data-name="Upma"> Upma - ₹35</label>
+        <select disabled>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
+        </select>
+      </div>
+      <div class="menu-item">
+        <label><input type="checkbox" name="item" value="50" data-name="Pongal"> Pongal - ₹50</label>
+        <select disabled>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
+        </select>
+      </div>
+      <div id="total">Total: ₹0</div>
+      <button type="button" onclick="showPayment()">Pay Now</button>
+    </form>
 
-    <h3>Total: ₹<span id="total">0</span></h3>
-    <button type="button" onclick="showPaymentOptions()">Pay Now</button>
-  </form>
+    <div class="payment-section" id="paymentOptions" style="display:none">
+      <button onclick="showQR()">GPay</button>
+      <button onclick="placeOrder()">Cash</button>
+    </div>
 
-  <!-- paymentSection part -->
-<div id="paymentSection" class="hidden">
-  <h3>Select Payment Mode</h3>
-  <button onclick="placeOrder('cash')">Cash</button>
-  <button onclick="placeOrder('gpay')">GPay</button>
-  <div id="qrCode" class="hidden" style="cursor: pointer; margin-top: 10px;">
+    <div class="qr" id="qrCode">
+      <p>Scan to pay via GPay</p>
+      <img src="qr.jpg" alt="QR Code" width="200">
+    </div>
+
+    <div class="placed" id="orderPlaced">
+      <p><strong>Order Placed</strong></p>
+      <p>Thanks for placing your order</p>
+      <div class="tick">✔️</div>
+    </div>
   </div>
-  <p style="color: #555; font-style: italic;">Click here to view QR Code</p>
-     <img src="C:\Users\HP\Downloads\qr.jpg">
-  <div id="orderSuccess" class="hidden">
-    <p>✅ Order Placed</p>
-    <p>Thanks for placing order</p>
-  </div>
-</div>
-
 
   <script>
-    const selects = document.querySelectorAll("select");
-    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const selects = document.querySelectorAll('select');
+    const totalDisplay = document.getElementById("total");
+    let total = 0;
 
-    checkboxes.forEach((checkbox, i) => {
-      const select = checkbox.nextElementSibling;
-      for (let q = 1; q <= 10; q++) {
-        const opt = document.createElement("option");
-        opt.value = q;
-        opt.text = q;
-        select.appendChild(opt);
-      }
-      checkbox.addEventListener("change", () => {
-        select.disabled = !checkbox.checked;
-        if (!checkbox.checked) select.value = 0;
+    checkboxes.forEach((cb, i) => {
+      cb.addEventListener('change', () => {
+        selects[i].disabled = !cb.checked;
+        if (!cb.checked) {
+          selects[i].value = 0;
+        }
         updateTotal();
       });
-      select.addEventListener("change", updateTotal);
+    });
+
+    selects.forEach(sel => {
+      sel.addEventListener('change', updateTotal);
     });
 
     function updateTotal() {
-      let total = 0;
-      checkboxes.forEach(cb => {
+      total = 0;
+      checkboxes.forEach((cb, i) => {
         if (cb.checked) {
-          const qty = parseInt(cb.nextElementSibling.value);
+          const qty = parseInt(selects[i].value);
           const price = parseInt(cb.value);
           total += qty * price;
         }
       });
-      document.getElementById("total").textContent = total;
+      totalDisplay.textContent = `Total: ₹${total}`;
     }
 
-    function showPaymentOptions() {
-      if (parseInt(document.getElementById("total").textContent) === 0) {
+    function showPayment() {
+      if (total === 0) {
         alert("Please select at least one item.");
         return;
       }
-      document.getElementById("paymentSection").classList.remove("hidden");
+      document.getElementById("paymentOptions").style.display = "block";
     }
 
-    function placeOrder(method) {
-      if (method === 'gpay') {
-        document.getElementById("qrCode").classList.remove("hidden");
-        setTimeout(() => {
-          document.getElementById("orderSuccess").classList.remove("hidden");
-        }, 2000);
-      } else {
-        document.getElementById("orderSuccess").classList.remove("hidden");
-      }
+    function showQR() {
+      document.getElementById("qrCode").style.display = "block";
+      document.getElementById("orderPlaced").style.display = "none";
+    }
+
+    function placeOrder() {
+      document.getElementById("qrCode").style.display = "none";
+      document.getElementById("orderPlaced").style.display = "block";
     }
   </script>
 </body>
