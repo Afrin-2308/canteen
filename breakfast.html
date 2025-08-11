@@ -6,7 +6,7 @@
   <title>Breakfast Menu</title>
   <style>
     body {
-      background-image: url('https://img.freepik.com/free-photo/breakfast-background-with-copy-space_23-2148221744.jpg');
+      background-image: url('https://images5.alphacoders.com/129/1290195.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -174,8 +174,15 @@
     }
 
     function showQR() {
-      document.getElementById("qrCode").style.display = "block";
-      document.getElementById("orderPlaced").style.display = "none";
+      if (total === 0) {
+        alert("Please select items first.");
+        return;
+      }
+      let upiID = "afrinafrose23@okicici"; // <-- Replace with your UPI ID
+      let name = "Breakfast Stall";
+      let note = "Breakfast Order";
+      let gpayLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&mc=0000&tid=txn123456&tn=${encodeURIComponent(note)}&am=${total}&cu=INR`;
+      window.location.href = gpayLink;
     }
 
     function placeOrder() {
