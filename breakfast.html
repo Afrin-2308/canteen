@@ -16,6 +16,7 @@
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
       font-family: Arial, sans-serif;
     }
+
     .menu-section {
       max-width: 600px;
       margin: 40px auto;
@@ -40,9 +41,9 @@
       margin-top: 20px;
       text-align: right;
     }
-    .payment-section button, .qr button {
+    .payment-section button {
       margin: 10px;
-      padding: 10px;
+      padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
       border-radius: 6px;
@@ -51,10 +52,10 @@
       color: white;
       transition: background-color 0.3s ease;
     }
-    .payment-section button:hover, .qr button:hover {
+    .payment-section button:hover {
       background-color: #388e3c;
     }
-    .qr, .placed {
+    .placed {
       display: none;
       text-align: center;
       margin-top: 20px;
@@ -111,18 +112,13 @@
     </form>
 
     <div class="payment-section" id="paymentOptions" style="display:none">
-      <button onclick="showQR()">GPay</button>
-      <button onclick="placeOrder()">Cash</button>
-    </div>
-
-    <div class="qr" id="qrCode">
-      <p>Scan to pay via GPay</p>
-      <img id="qrImage" src="" alt="QR Code" width="200"><br>
-      <button onclick="paymentDone()">Payment Done</button>
+      <button onclick="payWithGPay()">Pay with GPay</button>
+      <button onclick="payWithPhonePe()">Pay with PhonePe</button>
+      <button onclick="placeOrderCash()">Cash</button>
     </div>
 
     <div class="placed" id="orderPlaced">
-      <p><strong>Order Placed</strong></p>
+      <p><strong>Payment Successful</strong></p>
       <p>Thanks for placing your order</p>
       <div class="tick">✔️</div>
     </div>
@@ -134,8 +130,8 @@
     const totalDisplay = document.getElementById("total");
     let total = 0;
 
-    // Dummy Google Pay link for QR (replace with real link if needed)
-    const gpayLinkBase = "https://gpay.app.goo.gl/pay-demo"; 
+    const upiID = "yourupiid@okbank"; // Replace with your real UPI ID
+    const upiName = "Your Name"; // Replace with your name
 
     checkboxes.forEach((cb, i) => {
       cb.addEventListener('change', () => {
@@ -171,23 +167,31 @@
       document.getElementById("paymentOptions").style.display = "block";
     }
 
-    function showQR() {
-      // Append total to dummy GPay link
-      const gpayLink = `${gpayLinkBase}?amount=${total}`;
-      const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi://pay?pa=afrinafrose23@okicici&pn=Afrin%20Banu&aid=uGICAgMCl6aXYQw)}`;
-      document.getElementById("qrImage").src = qrURL;
-
-      document.getElementById("qrCode").style.display = "block";
-      document.getElementById("orderPlaced").style.display = "none";
+    function payWithGPay() {
+      const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(upiName)}&am=${total}&cu=INR`;
+      window.location.href = upiLink;
+      simulatePaymentSuccess();
     }
 
-    function paymentDone() {
-      document.getElementById("qrCode").style.display = "none";
-      document.getElementById("orderPlaced").style.display = "block";
+    function payWithPhonePe() {
+      const upiLink = `phonepe://pay?pa=${upiID}&pn=${encodeURIComponent(upiName)}&am=${total}&cu=INR`;
+      window.location.href = upiLink;
+      simulatePaymentSuccess();
     }
 
-    function placeOrder() {
-      document.getElementById("qrCode").style.display = "none";
+    function placeOrderCash() {
+      showSuccess();
+    }
+
+    function simulatePaymentSuccess() {
+      // Simulate payment success after 5 seconds
+      setTimeout(() => {
+        showSuccess();
+      }, 5000);
+    }
+
+    function showSuccess() {
+      document.getElementById("paymentOptions").style.display = "none";
       document.getElementById("orderPlaced").style.display = "block";
     }
   </script>
