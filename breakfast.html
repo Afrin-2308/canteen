@@ -9,7 +9,7 @@
       margin: 0;
       padding: 20px;
       font-family: Arial, sans-serif;
-      background-image: url('https://www.freepik.com/free-photo/toast-egg-bacon-tomatoes-microgreens-salad_6582109.htm#fromView=keyword&page=2&position=3&uuid=57f9a82c-1a8d-48c7-8cf6-99a4855549ab&query=English+Breakfast'); /* Breakfast image */
+      background-image: url('https://images5.alphacoders.com/129/1290195.jpg'); /* Breakfast image */
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -74,19 +74,20 @@
   </form>
 
   <!-- paymentSection part -->
-  <div id="paymentSection" class="hidden">
-    <h3>Select Payment Mode</h3>
-    <button onclick="placeOrder('cash')">Cash</button>
-    <button onclick="placeOrder('gpay')">GPay</button>
-    <div id="qrCode" class="hidden" style="cursor: pointer; margin-top: 10px;">
-    </div>
-    <p style="color: #555; font-style: italic;">Click here to view QR Code</p>
-    <img src="C:/Users/HP/Downloads/qr.jpg" alt="QR Code">
-    <div id="orderSuccess" class="hidden">
-      <p>✅ Order Placed</p>
-      <p>Thanks for placing order</p>
-    </div>
+<div id="paymentSection" class="hidden">
+  <h3>Select Payment Mode</h3>
+  <button onclick="placeOrder('cash')">Cash</button>
+  <button onclick="placeOrder('gpay')">GPay</button>
+  <div id="qrCode" class="hidden" style="cursor: pointer; margin-top: 10px;">
   </div>
+  <p style="color: #555; font-style: italic;">Click here to view QR Code</p>
+     <img src="C:\Users\HP\Downloads\qr.jpg">
+  <div id="orderSuccess" class="hidden">
+    <p>✅ Order Placed</p>
+    <p>Thanks for placing order</p>
+  </div>
+</div>
+
 
   <script>
     const selects = document.querySelectorAll("select");
@@ -129,20 +130,7 @@
     }
 
     function placeOrder(method) {
-      const totalAmount = document.getElementById("total").textContent;
-
       if (method === 'gpay') {
-        // Replace with your UPI ID and name
-        const upiId = "afrinafrose23@okicici";
-        const name = "Afrin Banu S";
-
-        // Create UPI link
-        const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${totalAmount}&cu=INR`;
-
-        // Open GPay or any UPI app
-        window.location.href = upi://pay?pa=afrinafrose23@okicici&pn=Afrin%20Banu&aid=uGICAgMCl6aXYQw;
-
-        // Show QR code as fallback
         document.getElementById("qrCode").classList.remove("hidden");
         setTimeout(() => {
           document.getElementById("orderSuccess").classList.remove("hidden");
