@@ -6,7 +6,7 @@
   <title>Breakfast Menu</title>
   <style>
     body {
-      background-image: url('https://images5.alphacoders.com/129/1290195.jpg');
+      background-image: url('https://img.freepik.com/free-photo/breakfast-background-with-copy-space_23-2148221744.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -16,7 +16,6 @@
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
       font-family: Arial, sans-serif;
     }
-
     .menu-section {
       max-width: 600px;
       margin: 40px auto;
@@ -41,7 +40,7 @@
       margin-top: 20px;
       text-align: right;
     }
-    .payment-section button {
+    .payment-section button, .qr button {
       margin: 10px;
       padding: 10px;
       font-size: 16px;
@@ -52,7 +51,7 @@
       color: white;
       transition: background-color 0.3s ease;
     }
-    .payment-section button:hover {
+    .payment-section button:hover, .qr button:hover {
       background-color: #388e3c;
     }
     .qr, .placed {
@@ -118,7 +117,8 @@
 
     <div class="qr" id="qrCode">
       <p>Scan to pay via GPay</p>
-      <img id="qrImage" src="" alt="QR Code" width="200">
+      <img id="qrImage" src="" alt="QR Code" width="200"><br>
+      <button onclick="paymentDone()">Payment Done</button>
     </div>
 
     <div class="placed" id="orderPlaced">
@@ -134,9 +134,8 @@
     const totalDisplay = document.getElementById("total");
     let total = 0;
 
-    // UPI details
-    const upiID = "afrinafrose23@okicicbank"; // replace with your UPI ID
-    const upiName = "Afrin Banu"; // replace with your name
+    // Dummy Google Pay link for QR (replace with real link if needed)
+    const gpayLinkBase = "https://gpay.app.goo.gl/pay-demo"; 
 
     checkboxes.forEach((cb, i) => {
       cb.addEventListener('change', () => {
@@ -173,12 +172,18 @@
     }
 
     function showQR() {
-      const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(upiName)}&am=${total}&cu=INR`;
-      const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
+      // Append total to dummy GPay link
+      const gpayLink = `${gpayLinkBase}?amount=${total}`;
+      const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(gpayLink)}`;
       document.getElementById("qrImage").src = qrURL;
 
       document.getElementById("qrCode").style.display = "block";
       document.getElementById("orderPlaced").style.display = "none";
+    }
+
+    function paymentDone() {
+      document.getElementById("qrCode").style.display = "none";
+      document.getElementById("orderPlaced").style.display = "block";
     }
 
     function placeOrder() {
