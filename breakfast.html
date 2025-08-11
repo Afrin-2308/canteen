@@ -174,7 +174,7 @@
     function showQR() {
       // Append total to dummy GPay link
       const gpayLink = `${gpayLinkBase}?amount=${total}`;
-      const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(gpayLink)}`;
+      const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi://pay?pa=afrinafrose23@okicici&pn=Afrin%20Banu&aid=uGICAgMCl6aXYQw)}`;
       document.getElementById("qrImage").src = qrURL;
 
       document.getElementById("qrCode").style.display = "block";
