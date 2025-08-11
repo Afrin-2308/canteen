@@ -1,87 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Food Order with GPay</title>
-<style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    label, select, input { margin: 10px 0; display: block; }
-    button { padding: 10px 15px; background: #4CAF50; color: white; border: none; cursor: pointer; }
-    button:hover { background: #45a049; }
-    #quantitySection { display: none; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Order with GPay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        select, input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+        #paymentMessage {
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Order Food</h2>
+    <h2>Order Your Food</h2>
 
-<label for="item">Select Item:</label>
-<select id="item">
-    <option value="">--Select--</option>
-    <option value="50">Idli - ₹50</option>
-    <option value="70">Dosa - ₹70</option>
-    <option value="100">Biriyani - ₹100</option>
-</select>
-
-<div id="quantitySection">
-    <label for="quantity">Quantity:</label>
-    <select id="quantity">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
+    <label for="foodItem">Select Item:</label>
+    <select id="foodItem" onchange="toggleQuantity()">
+        <option value="">--Select--</option>
+        <option value="50">Idli - ₹50</option>
+        <option value="80">Dosa - ₹80</option>
+        <option value="100">Biriyani - ₹100</option>
     </select>
-</div>
 
-<h3>Total: ₹<span id="total">0</span></h3>
+    <div id="quantitySection" style="display:none;">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" value="1" min="1">
+    </div>
 
-<button id="payBtn">Pay with GPay</button>
+    <br>
+    <button onclick="payWithGPay()">Pay with GPay</button>
 
-<script>
-let itemSelect = document.getElementById("item");
-let quantitySelect = document.getElementById("quantity");
-let quantitySection = document.getElementById("quantitySection");
-let totalDisplay = document.getElementById("total");
-let payBtn = document.getElementById("payBtn");
+    <div id="paymentMessage"></div>
 
-itemSelect.addEventListener("change", updateTotal);
-quantitySelect.addEventListener("change", updateTotal);
+    <script>
+        function toggleQuantity() {
+            const foodItem = document.getElementById('foodItem').value;
+            document.getElementById('quantitySection').style.display = foodItem ? 'block' : 'none';
+        }
 
-function updateTotal() {
-    let price = parseInt(itemSelect.value) || 0;
-    if (price > 0) {
-        quantitySection.style.display = "block";
-    } else {
-        quantitySection.style.display = "none";
-    }
-    let quantity = parseInt(quantitySelect.value) || 1;
-    totalDisplay.textContent = price * quantity;
-}
+        function payWithGPay() {
+            let itemPrice = document.getElementById('foodItem').value;
+            let quantity = document.getElementById('quantity').value;
 
-payBtn.addEventListener("click", function() {
-    let price = parseInt(itemSelect.value) || 0;
-    if (price === 0) {
-        alert("Please select an item first.");
-        return;
-    }
-    let quantity = parseInt(quantitySelect.value) || 1;
-    let total = price * quantity;
+            if (!itemPrice) {
+                alert("Please select a food item.");
+                return;
+            }
 
-    // Replace with your seller's UPI ID and name
-    let upiID = "afrinafrose23@okicici";
-    let payeeName = "Afrin Banu S";
+            let totalAmount = itemPrice * quantity;
 
-    let upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&am=${total}&cu=INR&tn=Food+Order`;
+            // Your seller's UPI details here
+            let upiId = "afrinafrose23@okicici";
+            let name = "Afrin Banu";
 
-    // Redirect to GPay
-    window.location.href = upi://pay?pa=afrinafrose23@okicici&pn=Afrin%20Banu&aid=uGICAgMCl6aXYQw;
+            // GPay UPI deep link
+            let gpayLink = `upi://pay?pa=${upiId}&pn=${name}&am=${totalAmount}&cu=INR`;
 
-    // After payment success (simulate for now)
-    setTimeout(() => {
-        alert("Payment Successful!");
-    }, 3000);
-});
-</script>
+            // Open GPay app
+            window.location.href = upi://pay?pa=afrinafrose23@okicici&pn=Afrin%20Banu&aid=uGICAgMCl6aXYQw;
+
+            // After payment, show message (simulated, actual payment confirmation needs backend)
+            setTimeout(() => {
+                document.getElementById("paymentMessage").innerText = "✅ Payment Successful!";
+            }, 5000); // Simulating 5 seconds delay
+        }
+    </script>
 
 </body>
 </html>
