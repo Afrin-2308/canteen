@@ -8,52 +8,68 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Ravie&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
   <style>
-    body {
+    :root {
+      --primary-color: #27ae60;
+      --primary-hover: #219150;
+      --accent-color: #d35400;
+      --text-color: #333;
+      --bg-overlay: rgba(255, 255, 255, 0.9);
+      --border-radius: 12px;
+      --box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    body {
       font-family: Arial, sans-serif;
       background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      color: var(--text-color);
     }
 
     header {
       width: 100%;
       text-align: center;
       padding: 20px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0));
     }
 
     header img {
-      max-height: 120px;
+      max-height: 100px;
     }
 
     main {
       flex: 1;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       width: 100%;
-      padding: 30px 10px;
+      padding: 20px;
     }
 
-    .login-container {
-      background: #fff;
+    .login-card {
+      background: var(--bg-overlay);
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      max-width: 380px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
       width: 100%;
+      max-width: 380px;
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
     }
 
     .login-title {
       font-family: 'Ravie', cursive;
       font-size: 24px;
-      color: #d35400;
+      color: var(--accent-color);
       margin-bottom: 20px;
     }
 
@@ -65,8 +81,8 @@
     label {
       display: block;
       font-size: 14px;
-      color: #333;
       margin-bottom: 5px;
+      font-weight: bold;
     }
 
     input[type="text"] {
@@ -75,29 +91,33 @@
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      box-sizing: border-box;
-      transition: border-color 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     input[type="text"]:focus {
-      border-color: #27ae60;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 6px rgba(39, 174, 96, 0.4);
       outline: none;
     }
 
     button {
       width: 100%;
       padding: 12px;
-      background-color: #27ae60;
+      background: var(--primary-color);
       color: #fff;
       font-size: 18px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.1s ease-in-out;
     }
 
     button:hover {
-      background-color: #219150;
+      background: var(--primary-hover);
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
 
     .note {
@@ -114,10 +134,25 @@
       background: rgba(255, 255, 255, 0.6);
       width: 100%;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 20px;
+      }
+      .login-title {
+        font-size: 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  
+
   <!-- Header -->
   <header>
     <img src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo">
@@ -125,10 +160,10 @@
 
   <!-- Main -->
   <main>
-    <section class="login-container">
+    <section class="login-card">
       <h1 class="login-title">Canteen Damaka</h1>
 
-      <form id="loginForm">
+      <form id="loginForm" novalidate>
         <div class="form-group">
           <label for="name">Your Name</label>
           <input type="text" id="name" name="name" placeholder="Enter your name" required>
