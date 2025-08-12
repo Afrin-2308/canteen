@@ -2,98 +2,106 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Canteen Damaka - Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Ravie&display=swap" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
-    body.index {
-      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+    body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
+      background: url('https://images.unsplash.com/photo-1600891965050-d2ff9bb6c08f?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      height: 100vh;
     }
 
-    /* Header with logo */
-    .logo-box {
-      width: 100%;
-      text-align: center;
-      padding: 20px 10px;
-    }
-
-    .logo-box img {
-      max-height: 120px;
-    }
-
-    /* Login container */
+    /* Container card */
     .container {
       background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
-      text-align: center;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
       width: 90%;
-      max-width: 380px;
-      margin-top: 30px;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
     }
 
+    /* Logo */
+    .logo {
+      max-height: 100px;
+      margin-bottom: 15px;
+    }
+
+    /* Title */
     .canteen-title {
-      font-family: 'Ravie', cursive;
-      font-size: 24px;
+      font-size: 26px;
+      font-weight: 600;
       color: #d35400;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
+    /* Input styling */
     .login-box input {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
       font-size: 16px;
       border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: 8px;
+      transition: 0.3s;
       box-sizing: border-box;
-      transition: border-color 0.3s ease;
     }
 
     .login-box input:focus {
       border-color: #27ae60;
       outline: none;
+      box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
     }
 
+    /* Button */
     .login-box button {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background-color: #27ae60;
       color: white;
       font-size: 18px;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.1s ease;
     }
 
     .login-box button:hover {
       background-color: #219150;
+      transform: scale(1.02);
     }
 
+    /* Note text */
     .note {
       font-size: 14px;
       color: #555;
-      margin-top: 10px;
+      margin-top: 15px;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="index">
-
-  <!-- Logo -->
-  <div class="logo-box">
-    <img src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo">
-  </div>
+<body>
 
   <!-- Login Form -->
   <div class="container">
+    <img class="logo" src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo">
     <h2 class="canteen-title">Canteen Damaka</h2>
     <div class="login-box">
       <input type="text" id="name" placeholder="Enter your name" required />
@@ -113,11 +121,9 @@
         return;
       }
 
-      // Store details in browser storage
       localStorage.setItem('studentName', name);
       localStorage.setItem('studentClass', cls);
 
-      // Redirect to menu
       window.location.href = 'menu.html';
     }
   </script>
