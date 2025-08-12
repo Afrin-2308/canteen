@@ -2,54 +2,76 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Canteen Damaka - Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Ravie&display=swap" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Ravie&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <style>
-    body.index {
-      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+    body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
     }
 
-    /* Header with logo */
-    .logo-box {
+    header {
       width: 100%;
       text-align: center;
-      padding: 20px 10px;
+      padding: 20px;
     }
 
-    .logo-box img {
+    header img {
       max-height: 120px;
     }
 
-    /* Login container */
-    .container {
-      background-color: rgb(255, 255, 255);
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      padding: 30px 10px;
+    }
+
+    .login-container {
+      background: #fff;
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
       text-align: center;
-      width: 90%;
       max-width: 380px;
-      margin-top: 30px;
+      width: 100%;
     }
 
-    .canteen-title {
+    .login-title {
       font-family: 'Ravie', cursive;
       font-size: 24px;
       color: #d35400;
       margin-bottom: 20px;
     }
 
-    .login-box input {
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 6px;
@@ -57,16 +79,16 @@
       transition: border-color 0.3s ease;
     }
 
-    .login-box input:focus {
+    input[type="text"]:focus {
       border-color: #27ae60;
       outline: none;
     }
 
-    .login-box button {
+    button {
       width: 100%;
       padding: 12px;
       background-color: #27ae60;
-      color: white;
+      color: #fff;
       font-size: 18px;
       border: none;
       border-radius: 6px;
@@ -74,7 +96,7 @@
       transition: background-color 0.3s ease;
     }
 
-    .login-box button:hover {
+    button:hover {
       background-color: #219150;
     }
 
@@ -83,28 +105,57 @@
       color: #555;
       margin-top: 10px;
     }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+      color: #444;
+      background: rgba(255, 255, 255, 0.6);
+      width: 100%;
+    }
   </style>
 </head>
-<body class="index">
-
-  <!-- Logo -->
-  <div class="logo-box">
+<body>
+  
+  <!-- Header -->
+  <header>
     <img src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo">
-  </div>
+  </header>
 
-  <!-- Login Form -->
-  <div class="container">
-    <h2 class="canteen-title">Canteen Damaka</h2>
-    <div class="login-box">
-      <input type="text" id="name" placeholder="Enter your name" required />
-      <input type="text" id="class" placeholder="Enter your class" required />
-      <button onclick="goToMenu()">Order Now</button>
+  <!-- Main -->
+  <main>
+    <section class="login-container">
+      <h1 class="login-title">Canteen Damaka</h1>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="class">Your Class</label>
+          <input type="text" id="class" name="class" placeholder="Enter your class" required>
+        </div>
+
+        <button type="submit">Order Now</button>
+      </form>
+
       <p class="note">Please enter accurate details to proceed to the menu.</p>
-    </div>
-  </div>
+    </section>
+  </main>
 
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Canteen Damaka | Prince Shri Venkateshwara Arts & Science College
+  </footer>
+
+  <!-- Script -->
   <script>
-    function goToMenu() {
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
       const name = document.getElementById('name').value.trim();
       const cls = document.getElementById('class').value.trim();
 
@@ -113,13 +164,11 @@
         return;
       }
 
-      // Store details in browser storage
       localStorage.setItem('studentName', name);
       localStorage.setItem('studentClass', cls);
 
-      // Redirect to menu
       window.location.href = 'menu.html';
-    }
+    });
   </script>
 
 </body>
