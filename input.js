@@ -16,7 +16,7 @@ function sendOrderToSheet(item, quantity) {
         quantity: quantity
     };
 
-    fetch("YOUR_WEB_APP_URL", {  // Replace with the URL from Step 2
+    fetch("https://script.google.com/macros/s/AKfycbzW4SskvtMxd6pYEMYqXTp-yKKjmWOUvU451DfOAfdPcRPK2Diz6mU3FLO4donjV5JRMg/exec", {  // Replace with the URL from Step 2
         method: "POST",
         body: JSON.stringify(orderDetails)
     })
