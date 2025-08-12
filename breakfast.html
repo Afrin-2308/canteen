@@ -6,7 +6,7 @@
   <title>Breakfast Menu</title>
   <style>
     body {
-      background-image: url('https://images5.alphacoders.com/129/1290195.jpg');
+      background-image: url('https://img.freepik.com/free-photo/breakfast-background-with-copy-space_23-2148221744.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -77,9 +77,7 @@
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-          <option value="10">10</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
@@ -87,9 +85,7 @@
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-          <option value="10">10</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
@@ -97,19 +93,15 @@
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-          <option value="10">10</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" name="item" value="12" data-name="Tea"> Tea - ₹12</label>
+        <label><input type="checkbox" name="item" value="35" data-name="Upma"> Upma - ₹35</label>
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-          <option value="10">10</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
@@ -117,9 +109,7 @@
         <select disabled>
           <option value="0">Qty</option>
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-          <option value="10">10</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div id="total">Total: ₹0</div>
@@ -131,20 +121,14 @@
       <button onclick="placeOrder()">Cash</button>
     </div>
 
-    <div id="total">Total: ₹0</div>
-      <button type="button" onclick="showPayment()">Pay Now</button>
-    </form>
-    <div class="payment-section" id="paymentOptions" style="display:none">
-      <button onclick="showQR()">GPay</button>
-      <button onclick="placeOrder()">Cash</button>
-    </div>
     <div class="qr" id="qrCode">
       <p>Scan to pay via GPay</p>
-      <img src="C:\Users\HP\Downloads\qr.jpg" alt="QR Code">
+      <img src="qr.jpg" alt="QR Code" width="200">
     </div>
+
     <div class="placed" id="orderPlaced">
       <p><strong>Order Placed</strong></p>
-      <p>Thanks for placing order</p>
+      <p>Thanks for placing your order</p>
       <div class="tick">✔️</div>
     </div>
   </div>
@@ -190,15 +174,8 @@
     }
 
     function showQR() {
-      if (total === 0) {
-        alert("Please select items first.");
-        return;
-      }
-      let upiID = "afrinafrose23@okicici"; // <-- Replace with your UPI ID
-      let name = "Breakfast Stall";
-      let note = "Breakfast Order";
-      let gpayLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&mc=0000&tid=txn123456&tn=${encodeURIComponent(note)}&am=${total}&cu=INR`;
-      window.location.href = gpayLink;
+      document.getElementById("qrCode").style.display = "block";
+      document.getElementById("orderPlaced").style.display = "none";
     }
 
     function placeOrder() {
