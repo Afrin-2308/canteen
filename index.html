@@ -6,10 +6,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Ravie&display=swap" rel="stylesheet" />
   <style>
     body.index {
-      background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
@@ -19,38 +16,26 @@
       min-height: 100vh;
     }
 
-    /* 🔷 Top header with logo and name - transparent background */
+    /* Header with logo */
     .logo-box {
       width: 100%;
       text-align: center;
       padding: 20px 10px;
-      /* Removed background and box-shadow to make it transparent */
-      background: transparent;
-      box-shadow: none;
     }
 
     .logo-box img {
-      max-height: 150px;
+      max-height: 120px;
     }
 
-    .college-name {
-      margin-top: 10px;
-      color: black; 
-      font-size: 22px;
-      font-weight: bold;
-      /* subtle shadow for better readability */
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    }
-
-    /* 🔷 Login box */
+    /* Login container */
     .container {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
       text-align: center;
       width: 90%;
-      max-width: 400px;
+      max-width: 380px;
       margin-top: 30px;
     }
 
@@ -63,57 +48,77 @@
 
     .login-box input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 6px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    .login-box input:focus {
+      border-color: #27ae60;
+      outline: none;
     }
 
     .login-box button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background-color: #27ae60;
       color: white;
       font-size: 18px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
     .login-box button:hover {
       background-color: #219150;
     }
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body class="index">
 
-  <!-- 🔷 Logo + College Name -->
+  <!-- Logo -->
   <div class="logo-box">
     <img src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo">
   </div>
 
-  <!-- 🔷 Canteen Login Form -->
+  <!-- Login Form -->
   <div class="container">
     <h2 class="canteen-title">Canteen Damaka</h2>
     <div class="login-box">
-      <input type="text" id="name" placeholder="Enter your name" />
-      <input type="text" id="class" placeholder="Enter your class" />
+      <input type="text" id="name" placeholder="Enter your name" required />
+      <input type="text" id="class" placeholder="Enter your class" required />
       <button onclick="goToMenu()">Order Now</button>
+      <p class="note">Please enter accurate details to proceed to the menu.</p>
     </div>
   </div>
 
   <script>
     function goToMenu() {
-      const name = document.getElementById('name').value;
-      const cls = document.getElementById('class').value;
-      if (name && cls) {
-        localStorage.setItem('studentName', name);
-        localStorage.setItem('studentClass', cls);
-        window.location.href = 'menu.html';
-      } else {
-        alert('Please enter your name and class.');
+      const name = document.getElementById('name').value.trim();
+      const cls = document.getElementById('class').value.trim();
+
+      if (!name || !cls) {
+        alert('Please enter both your name and class.');
+        return;
       }
+
+      // Store details in browser storage
+      localStorage.setItem('studentName', name);
+      localStorage.setItem('studentClass', cls);
+
+      // Redirect to menu
+      window.location.href = 'menu.html';
     }
   </script>
 
