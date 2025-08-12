@@ -16,7 +16,6 @@
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
       font-family: Arial, sans-serif;
     }
-
     .menu-section {
       max-width: 600px;
       margin: 40px auto;
@@ -73,35 +72,35 @@
     <h2>Breakfast Menu</h2>
     <form id="breakfastForm">
       <div class="menu-item">
-        <label><input type="checkbox" value="30"> Idli (2 pcs) - ₹30</label>
+        <label><input type="checkbox" value="30" data-name="Idli (2 pcs)"> Idli (2 pcs) - ₹30</label>
         <select disabled>
           <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
           <option value="3">3</option><option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" value="40"> Dosa - ₹40</label>
+        <label><input type="checkbox" value="40" data-name="Dosa"> Dosa - ₹40</label>
         <select disabled>
           <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
           <option value="3">3</option><option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" value="45"> Poori (2 pcs) - ₹45</label>
+        <label><input type="checkbox" value="45" data-name="Poori (2 pcs)"> Poori (2 pcs) - ₹45</label>
         <select disabled>
           <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
           <option value="3">3</option><option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" value="35"> Upma - ₹35</label>
+        <label><input type="checkbox" value="35" data-name="Upma"> Upma - ₹35</label>
         <select disabled>
           <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
           <option value="3">3</option><option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" value="50"> Pongal - ₹50</label>
+        <label><input type="checkbox" value="50" data-name="Pongal"> Pongal - ₹50</label>
         <select disabled>
           <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
           <option value="3">3</option><option value="4">4</option><option value="5">5</option>
@@ -182,8 +181,32 @@
     }
 
     function placeOrder() {
-      document.getElementById("qrCode").style.display = "none";
-      document.getElementById("orderPlaced").style.display = "block";
+      // Collect order details
+      const orderItems = [];
+      checkboxes.forEach((cb, i) => {
+        if (cb.checked && parseInt(selects[i].value) > 0) {
+          orderItems.push({
+            item: cb.getAttribute("data-name"),
+            qty: selects[i].value,
+            price: cb.value
+          });
+        }
+      });
+
+      // Send data to Google Apps Script backend
+      fetch("https://script.google.com/macros/s/AKfycby07LAmpcWKUJmwybbFMxng3wmVsTLJhmVwBl3AVJoq-SllwvlC6NJmP4l_rWETmJN9GQ/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          order: orderItems,
+          total: total,
+          payment: "Cash"
+        })
+      }).then(() => {
+        document.getElementById("qrCode").style.display = "none";
+        document.getElementById("orderPlaced").style.display = "block";
+      });
     }
   </script>
 </body>
