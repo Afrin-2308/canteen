@@ -6,7 +6,7 @@
   <title>Breakfast Menu</title>
   <style>
     body {
-      background-image: url('https://images5.alphacoders.com/129/1290195.jpg');
+      background-image: url('https://img.freepik.com/free-photo/breakfast-background-with-copy-space_23-2148221744.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -73,38 +73,43 @@
     <h2>Breakfast Menu</h2>
     <form id="breakfastForm">
       <div class="menu-item">
-        <label><input type="checkbox" value="30"> Idli (2 pcs) - ₹30</label>
+        <label><input type="checkbox" name="item" value="30" data-name="Idli"> Idli (2 pcs) - ₹30</label>
         <select disabled>
-          <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
-          <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" value="40"> Dosa - ₹40</label>
+        <label><input type="checkbox" name="item" value="40" data-name="Dosa"> Dosa - ₹40</label>
         <select disabled>
-          <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
-          <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" value="45"> Poori (2 pcs) - ₹45</label>
+        <label><input type="checkbox" name="item" value="45" data-name="Poori"> Poori (2 pcs) - ₹45</label>
         <select disabled>
-          <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
-          <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" value="35"> Upma - ₹35</label>
+        <label><input type="checkbox" name="item" value="35" data-name="Upma"> Upma - ₹35</label>
         <select disabled>
-          <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
-          <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div class="menu-item">
-        <label><input type="checkbox" value="50"> Pongal - ₹50</label>
+        <label><input type="checkbox" name="item" value="50" data-name="Pongal"> Pongal - ₹50</label>
         <select disabled>
-          <option value="0">Qty</option><option value="1">1</option><option value="2">2</option>
-          <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          <option value="0">Qty</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
         </select>
       </div>
       <div id="total">Total: ₹0</div>
@@ -118,7 +123,7 @@
 
     <div class="qr" id="qrCode">
       <p>Scan to pay via GPay</p>
-      <img id="qrImage" src="" alt="QR Code" width="200">
+      <img src="qr.jpg" alt="QR Code" width="200">
     </div>
 
     <div class="placed" id="orderPlaced">
@@ -133,10 +138,6 @@
     const selects = document.querySelectorAll('select');
     const totalDisplay = document.getElementById("total");
     let total = 0;
-
-    // UPI details
-    const upiID = "yourupiid@okbank"; // replace with your UPI ID
-    const upiName = "Your Name"; // replace with your name
 
     checkboxes.forEach((cb, i) => {
       cb.addEventListener('change', () => {
@@ -161,7 +162,7 @@
           total += qty * price;
         }
       });
-      totalDisplay.textContent = Total: ₹${total};
+      totalDisplay.textContent = `Total: ₹${total}`;
     }
 
     function showPayment() {
@@ -173,10 +174,6 @@
     }
 
     function showQR() {
-      const upiLink = upi://pay?pa=${upiID}&pn=${encodeURIComponent(upiName)}&am=${total}&cu=INR;
-      const qrURL = https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)};
-      document.getElementById("qrImage").src = qrURL;
-
       document.getElementById("qrCode").style.display = "block";
       document.getElementById("orderPlaced").style.display = "none";
     }
