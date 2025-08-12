@@ -112,12 +112,14 @@
 
     <div class="payment-section" id="paymentOptions" style="display:none">
       <button onclick="showQR()">GPay</button>
-      <button onclick="placeOrder()">Cash</button>
+      <button onclick="placeOrder('Cash')">Cash</button>
     </div>
 
     <div class="qr" id="qrCode">
       <p>Scan to pay via GPay</p>
       <img id="qrImage" src="" alt="QR Code" width="200">
+      <br>
+      <button onclick="placeOrder('GPay')">Confirm Payment</button>
     </div>
 
     <div class="placed" id="orderPlaced">
@@ -133,9 +135,8 @@
     const totalDisplay = document.getElementById("total");
     let total = 0;
 
-    // UPI details
-    const upiID = "yourupiid@okbank"; // replace with your UPI ID
-    const upiName = "Your Name"; // replace with your name
+    const upiID = "yourupiid@okbank"; 
+    const upiName = "Your Name"; 
 
     checkboxes.forEach((cb, i) => {
       cb.addEventListener('change', () => {
@@ -175,13 +176,11 @@
       const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(upiName)}&am=${total}&cu=INR`;
       const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
       document.getElementById("qrImage").src = qrURL;
-
       document.getElementById("qrCode").style.display = "block";
       document.getElementById("orderPlaced").style.display = "none";
     }
 
-    function placeOrder() {
-      // Collect order details
+    function placeOrder(paymentMode) {
       const orderItems = [];
       checkboxes.forEach((cb, i) => {
         if (cb.checked && parseInt(selects[i].value) > 0) {
@@ -193,15 +192,20 @@
         }
       });
 
-      // Send data to Google Apps Script backend
+      const itemsString = orderItems.map(o => `${o.item} (x${o.qty})`).join(", ");
+      const totalQty = orderItems.reduce((sum, o) => sum + parseInt(o.qty), 0);
+      const totalPrice = orderItems.reduce((sum, o) => sum + (parseInt(o.qty) * parseInt(o.price)), 0);
+
       fetch("https://script.google.com/macros/s/AKfycby07LAmpcWKUJmwybbFMxng3wmVsTLJhmVwBl3AVJoq-SllwvlC6NJmP4l_rWETmJN9GQ/exec", {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          order: orderItems,
-          total: total,
-          payment: "Cash"
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          item: itemsString,
+          quantity: totalQty,
+          price: totalPrice,
+          payment: paymentMode,
+          datetime: new Date().toLocaleString()
         })
       }).then(() => {
         document.getElementById("qrCode").style.display = "none";
