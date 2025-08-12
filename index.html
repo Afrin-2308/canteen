@@ -1,132 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Canteen Damaka - Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen - User Info</title>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1606787366850-de6330128bfc'); /* Change to your image */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+        .form-box {
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+        }
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: url('https://images.unsplash.com/photo-1600891965050-d2ff9bb6c08f?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+        .form-box input {
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+            padding: 10px;
+            margin: 10px 0;
+            width: 250px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
 
-    /* Container card */
-    .container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      animation: fadeIn 0.8s ease-in-out;
-    }
+        .form-box input::placeholder {
+            color: lightgray;
+        }
 
-    /* Logo */
-    .logo {
-      max-height: 100px;
-      margin-bottom: 15px;
-    }
+        .form-box button {
+            background-color: #ff9800;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
 
-    /* Title */
-    .canteen-title {
-      font-size: 26px;
-      font-weight: 600;
-      color: #d35400;
-      margin-bottom: 25px;
-    }
-
-    /* Input styling */
-    .login-box input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      transition: 0.3s;
-      box-sizing: border-box;
-    }
-
-    .login-box input:focus {
-      border-color: #27ae60;
-      outline: none;
-      box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
-    }
-
-    /* Button */
-    .login-box button {
-      width: 100%;
-      padding: 14px;
-      background-color: #27ae60;
-      color: white;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s ease, transform 0.1s ease;
-    }
-
-    .login-box button:hover {
-      background-color: #219150;
-      transform: scale(1.02);
-    }
-
-    /* Note text */
-    .note {
-      font-size: 14px;
-      color: #555;
-      margin-top: 15px;
-    }
-
-    /* Animation */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+        .form-box button:hover {
+            background-color: #e68900;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Login Form -->
-  <div class="container">
-    <img class="logo" src="https://princescience.in/wp-content/uploads/2022/09/Prince-Shri-Venkateshwara-Arts-Scienc1e-College-New-Logo1.png" alt="College Logo">
-    <h2 class="canteen-title">Canteen Damaka</h2>
-    <div class="login-box">
-      <input type="text" id="name" placeholder="Enter your name" required />
-      <input type="text" id="class" placeholder="Enter your class" required />
-      <button onclick="goToMenu()">Order Now</button>
-      <p class="note">Please enter accurate details to proceed to the menu.</p>
+    <div class="form-box">
+        <h2>Enter Your Details</h2>
+        <input type="text" id="username" placeholder="Enter your name">
+        <br>
+        <input type="text" id="class" placeholder="Enter your class">
+        <br>
+        <button onclick="startOrder()">Proceed</button>
     </div>
-  </div>
 
-  <script>
-    function goToMenu() {
-      const name = document.getElementById('name').value.trim();
-      const cls = document.getElementById('class').value.trim();
-
-      if (!name || !cls) {
-        alert('Please enter both your name and class.');
-        return;
-      }
-
-      localStorage.setItem('studentName', name);
-      localStorage.setItem('studentClass', cls);
-
-      window.location.href = 'menu.html';
-    }
-  </script>
+    <script>
+        function startOrder() {
+            const name = document.getElementById("username").value.trim();
+            const className = document.getElementById("class").value.trim();
+            if (name && className) {
+                localStorage.setItem("userName", name);
+                localStorage.setItem("userClass", className);
+                window.location.href = "menu.html"; // change to your menu page
+            } else {
+                alert("Please enter both name and class.");
+            }
+        }
+    </script>
 
 </body>
 </html>
