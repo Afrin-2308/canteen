@@ -2,47 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Select Your Meal</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
+    /* Reset some default browser styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body.menu {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      min-height: 100vh;
 
-      /* Background image from Google */
-      background-image: url('https://t4.ftcdn.net/jpg/02/92/20/37/360_F_292203735_CSsyqyS6A4Z9Czd4Msf7qZEhoxjpzZl1.jpg');
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+        url('https://t4.ftcdn.net/jpg/02/92/20/37/360_F_292203735_CSsyqyS6A4Z9Czd4Msf7qZEhoxjpzZl1.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      color: white; /* Text color for contrast */
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7); /* subtle shadow for readability */
+
+      color: white;
+      padding: 20px;
     }
+
+    /* Animated heading */
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Meal buttons container */
     .meal-options {
-      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 300px;
     }
+
+    /* Buttons style */
     .meal-options button {
-      margin: 10px;
-      padding: 15px 30px;
+      padding: 15px;
       font-size: 1.2rem;
       cursor: pointer;
-      border-radius: 10px;
+      border-radius: 12px;
       border: none;
-      background: rgba(76, 175, 80, 0.8); /* Slightly transparent green */
+      background: rgba(255, 255, 255, 0.15);
       color: white;
-      transition: background-color 0.3s ease;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
     }
+
     .meal-options button:hover {
-      background: rgba(56, 142, 60, 0.9);
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+
+    /* Mobile responsive text */
+    @media (max-width: 500px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+      .meal-options button {
+        font-size: 1rem;
+        padding: 12px;
+      }
     }
   </style>
 </head>
 <body class="menu">
-  <h2>Select a Meal</h2>
+  <h2>🍴 Select Your Meal</h2>
   <div class="meal-options">
     <button onclick="location.href='breakfast.html'">🍳 Breakfast</button>
     <button onclick="location.href='lunch.html'">🍛 Lunch</button>
