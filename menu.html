@@ -1,102 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select Your Meal</title>
-  <style>
-    /* Reset some default browser styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Animation</title>
+<style>
+  body {
+    margin: 0;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 40px;
+  }
+
+  /* Common style for both images */
+  .meal-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    opacity: 0;
+  }
+
+  /* Breakfast slides from the right */
+  .breakfast {
+    animation: slideFromRight 1.5s ease forwards;
+  }
+
+  /* Lunch slides from the left */
+  .lunch {
+    animation: slideFromLeft 1.5s ease forwards;
+  }
+
+  @keyframes slideFromRight {
+    from {
+      transform: translateX(150%);
+      opacity: 0;
     }
-
-    body.menu {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-
-      background-image: linear-gradient(
-          rgba(0, 0, 0, 0.5), 
-          rgba(0, 0, 0, 0.5)
-        ),
-        url('https://t4.ftcdn.net/jpg/02/92/20/37/360_F_292203735_CSsyqyS6A4Z9Czd4Msf7qZEhoxjpzZl1.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-
-      color: white;
-      padding: 20px;
+    to {
+      transform: translateX(0);
+      opacity: 1;
     }
+  }
 
-    /* Animated heading */
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-      animation: fadeInDown 1s ease-out;
+  @keyframes slideFromLeft {
+    from {
+      transform: translateX(-150%);
+      opacity: 0;
     }
-
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    to {
+      transform: translateX(0);
+      opacity: 1;
     }
-
-    /* Meal buttons container */
-    .meal-options {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      width: 100%;
-      max-width: 300px;
-    }
-
-    /* Buttons style */
-    .meal-options button {
-      padding: 15px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      border-radius: 12px;
-      border: none;
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      backdrop-filter: blur(5px);
-      transition: all 0.3s ease;
-    }
-
-    .meal-options button:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: scale(1.05);
-    }
-
-    /* Mobile responsive text */
-    @media (max-width: 500px) {
-      h2 {
-        font-size: 1.5rem;
-      }
-      .meal-options button {
-        font-size: 1rem;
-        padding: 12px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
-<body class="menu">
-  <h2>🍴 Select Your Meal</h2>
-  <div class="meal-options">
-    <button onclick="location.href='breakfast.html'">🍳 Breakfast</button>
-    <button onclick="location.href='lunch.html'">🍛 Lunch</button>
-  </div>
+<body>
+
+  <!-- Breakfast image from right -->
+  <img src="https://images.unsplash.com/photo-1604908177764-950c7ba2c9f7" 
+       alt="Breakfast" class="meal-img breakfast">
+
+  <!-- Lunch image from left -->
+  <img src="https://images.unsplash.com/photo-1603048297179-9c6c3c98cd2d" 
+       alt="Lunch" class="meal-img lunch">
+
 </body>
 </html>
