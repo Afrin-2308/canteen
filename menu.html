@@ -1,72 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meal Animation</title>
-<style>
-  body {
-    margin: 0;
-    background: #111;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    gap: 40px;
-  }
-
-  /* Common style for both images */
-  .meal-img {
-    width: 200px;
-    height: 200px;
-    border-radius: 15px;
-    object-fit: cover;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    opacity: 0;
-  }
-
-  /* Breakfast slides from the right */
-  .breakfast {
-    animation: slideFromRight 1.5s ease forwards;
-  }
-
-  /* Lunch slides from the left */
-  .lunch {
-    animation: slideFromLeft 1.5s ease forwards;
-  }
-
-  @keyframes slideFromRight {
-    from {
-      transform: translateX(150%);
-      opacity: 0;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Your Meal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
 
-  @keyframes slideFromLeft {
-    from {
-      transform: translateX(-150%);
-      opacity: 0;
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+      background: #fefefe;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
-    to {
-      transform: translateX(0);
-      opacity: 1;
+
+    h2 {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      font-weight: bold;
     }
-  }
-</style>
+
+    .meals {
+      display: flex;
+      gap: 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .meal img {
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .meal img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Animations for entering */
+    .breakfast {
+      animation: slideRight 1.5s ease-out forwards;
+    }
+
+    .lunch {
+      animation: slideLeft 1.5s ease-out forwards;
+    }
+
+    @keyframes slideRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Flying veggies background */
+    .veggie {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      opacity: 0.7;
+      animation: floatVeggie linear infinite;
+    }
+
+    @keyframes floatVeggie {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-150px) rotate(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
+  <h2>🍴 Select Your Meal</h2>
+  <div class="meals">
+    <div class="meal breakfast" onclick="location.href='breakfast.html'">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/English_breakfast_2.jpg" alt="Breakfast">
+    </div>
+    <div class="meal lunch" onclick="location.href='lunch.html'">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Indian_Thali.jpg" alt="Lunch">
+    </div>
+  </div>
 
-  <!-- Breakfast image from right -->
-  <img src="https://images.unsplash.com/photo-1604908177764-950c7ba2c9f7" 
-       alt="Breakfast" class="meal-img breakfast">
-
-  <!-- Lunch image from left -->
-  <img src="https://images.unsplash.com/photo-1603048297179-9c6c3c98cd2d" 
-       alt="Lunch" class="meal-img lunch">
+  <!-- Flying veggies -->
+  <img class="veggie" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Tomato.png" style="left:10%; animation-duration:8s;">
+  <img class="veggie" src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Broccoli_and_cross_section_edit.jpg" style="left:30%; animation-duration:10s;">
+  <img class="veggie" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Carrot.jpg" style="left:50%; animation-duration:7s;">
+  <img class="veggie" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Capsicum.jpg" style="left:70%; animation-duration:9s;">
+  <img class="veggie" src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cucumber.jpg" style="left:85%; animation-duration:6s;">
 
 </body>
 </html>
