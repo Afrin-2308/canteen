@@ -19,7 +19,7 @@ const cors = require("cors");
 // Email configuration (using Gmail in this example)
 const OWNER_EMAIL = "afrinafrose23@gmail.com";
 const EMAIL_USER = "rajasekar10902@gmail.com"; // Your email
-const EMAIL_PASS = "kqit neoc digy sizn";    // Gmail App Password (NOT your login password)
+const EMAIL_PASS = "kqit neoc diqy sizn";    // Gmail App Password (NOT your login password)
 
 // Twilio configuration
 const TWILIO_SID = "your_account_sid";
