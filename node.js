@@ -17,8 +17,8 @@ const cors = require("cors");
 // ------------------ CONFIG ------------------
 
 // Email configuration (using Gmail in this example)
-const OWNER_EMAIL = "";
-const EMAIL_USER = ""; // Your email
+const OWNER_EMAIL = "afrinafrose23@gmail.com";
+const EMAIL_USER = "rajasekar10902@gmail.com"; // Your email
 const EMAIL_PASS = "";    // Gmail App Password (NOT your login password)
 
 // Twilio configuration
