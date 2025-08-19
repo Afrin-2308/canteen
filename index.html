@@ -174,6 +174,12 @@
           <input type="text" id="class" name="class" placeholder="Enter your class" required>
         </div>
 
+        <!-- ✅ New Phone Number Field -->
+        <div class="form-group">
+          <label for="phone">Your Phone Number</label>
+          <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+        </div>
+
         <button type="submit">Order Now</button>
       </form>
 
@@ -193,14 +199,16 @@
       
       const name = document.getElementById('name').value.trim();
       const cls = document.getElementById('class').value.trim();
+      const phone = document.getElementById('phone').value.trim();
 
-      if (!name || !cls) {
-        alert('Please enter both your name and class.');
+      if (!name || !cls || !phone) {
+        alert('Please enter your name, class, and phone number.');
         return;
       }
 
       localStorage.setItem('studentName', name);
       localStorage.setItem('studentClass', cls);
+      localStorage.setItem('studentPhone', phone);
 
       window.location.href = 'menu.html';
     });
