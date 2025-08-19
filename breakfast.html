@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -224,21 +225,6 @@
       });
       document.getElementById('total').textContent = `Total: ₹${total}`;
     }
-from twilio.rest import Client
-
-# Twilio credentials from your account
-account_sid = "AC4cdc6ce98186437e415b53d928ba6f4b"
-auth_token = "de8859782ca7d3c96ae1348961c3f3c6"
-client = Client(account_sid, auth_token)
-
-# Send SMS directly
-message = client.messages.create(
-    body="New Order Received: 2x Idli = ₹40, 1x Dosa = ₹40, Total = ₹80",
-    from_="+14122139810",   # Twilio number
-    to="+919043665785"     # Canteen owner's number
-)
-
-print("Order SMS sent! Message ID:", message.sid)
 
     /**
      * Constructing the request payload for the API
